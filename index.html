@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nishita — Business Analyst Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B2D;
+    --ink-2:#16273D;
+    --ink-3:#1E3350;
+    --paper:#ECEAE2;
+    --paper-2:#E1DED2;
+    --cyan:#7FB8BE;
+    --cyan-dim:#4F868C;
+    --amber:#D6A24C;
+    --text-light:#E8E6DD;
+    --text-light-dim:#A7ADB8;
+    --text-dark:#16202C;
+    --text-dark-dim:#5B6470;
+    --line:rgba(232,230,221,0.14);
+    --line-dark:rgba(22,32,44,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'IBM Plex Sans', sans-serif;
+    background:var(--ink);
+    color:var(--text-light);
+    line-height:1.6;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .serif{font-family:'IBM Plex Serif', serif;}
+
+  nav{
+    position:sticky; top:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 6vw;
+    background:rgba(15,27,45,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .brand{font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:0.08em; color:var(--cyan);}
+  nav ul{list-style:none; display:flex; gap:28px;}
+  nav a{color:var(--text-light-dim); text-decoration:none; font-size:13px; letter-spacing:0.03em; transition:color 0.2s; position:relative; padding-bottom:4px;}
+  nav a:hover{color:var(--amber);}
+  nav a.active{color:var(--cyan);}
+  nav a.active::after{
+    content:''; position:absolute; left:0; right:0; bottom:-6px; height:1px; background:var(--cyan);
+  }
+  @media (max-width:720px){ nav ul{display:none;} }
+
+  section{padding:100px 6vw;}
+  .light-panel{background:var(--paper); color:var(--text-dark);}
+
+  .hero{
+    position:relative;
+    padding:120px 6vw 100px;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:48px 48px;
+    overflow:hidden;
+  }
+  .hero::before, .hero::after{
+    content:''; position:absolute; width:24px; height:24px;
+    border-color:var(--cyan-dim);
+  }
+  .hero::before{ top:32px; left:6vw; border-top:1px solid; border-left:1px solid; }
+  .hero::after{ bottom:32px; right:6vw; border-bottom:1px solid; border-right:1px solid; }
+
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:var(--amber); margin-bottom:20px; text-transform:uppercase;}
+  .hero h1{
+    font-family:'IBM Plex Serif', serif;
+    font-weight:500;
+    font-size:clamp(34px, 5vw, 58px);
+    line-height:1.12;
+    max-width:820px;
+    color:var(--text-light);
+  }
+  .hero h1 em{font-style:normal; color:var(--cyan);}
+  .hero p.lead{
+    max-width:620px; margin-top:26px; font-size:16px; color:var(--text-light-dim);
+  }
+
+  .tagrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:32px;}
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    border:1px solid var(--line); padding:6px 12px; border-radius:2px;
+    color:var(--text-light-dim);
+  }
+
+  .cta-row{display:flex; gap:16px; margin-top:40px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:0.03em;
+    padding:12px 22px; border-radius:2px; text-decoration:none; border:1px solid var(--cyan-dim);
+    color:var(--text-light); transition:all 0.2s;
+  }
+  .btn.primary{background:var(--cyan-dim); border-color:var(--cyan-dim);}
+  .btn.primary:hover{background:var(--cyan);}
+  .btn.ghost:hover{border-color:var(--amber); color:var(--amber);}
+
+  .section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:32px;}
+  .fig-label{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--amber); letter-spacing:0.1em;}
+  .light-panel .fig-label{color:#9A6E1F;}
+  h2.section-title{font-family:'IBM Plex Serif', serif; font-weight:500; font-size:30px;}
+
+  .cs-meta{margin-bottom:40px;}
+  .cs-meta .cs-tagline{font-size:15px; margin-bottom:8px; color:var(--text-dark-dim);}
+  .cs-confidential{font-size:12px; color:#6B7480; font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em;}
+  .cs-confidential strong{font-weight:600; color:#4F5D6B;}
+
+  .cs-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-bottom:56px;}
+  @media (max-width:720px){ .cs-grid{grid-template-columns:1fr;} }
+  .cs-block h3{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dark-dim); margin-bottom:10px;}
+  .cs-block p{font-size:15px; color:var(--text-dark);}
+
+  .process-strip{
+    display:flex; align-items:stretch; gap:0; margin:56px 0; flex-wrap:wrap;
+    border-top:1px solid var(--line-dark); border-bottom:1px solid var(--line-dark);
+  }
+  .p-step{
+    flex:1; min-width:150px; padding:22px 18px; border-right:1px solid var(--line-dark); position:relative;
+  }
+  .p-step:last-child{border-right:none;}
+  .p-num{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--cyan-dim); margin-bottom:8px;}
+  .p-title{font-family:'IBM Plex Serif', serif; font-size:16px; font-weight:500; margin-bottom:6px;}
+  .p-desc{font-size:13px; color:var(--text-dark-dim); line-height:1.5;}
+
+  .callout{
+    border:1px solid var(--line-dark); padding:24px 28px; margin-top:20px;
+    background:var(--paper-2);
+  }
+  .callout h4{font-family:'IBM Plex Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dark-dim); margin-bottom:12px;}
+  .callout ul{padding-left:18px; font-size:14px;}
+  .callout li{margin-bottom:6px;}
+
+  .metric-row{display:flex; gap:1px; margin-top:40px; flex-wrap:wrap; background:var(--line-dark);}
+  .metric{flex:1; min-width:160px; background:var(--paper); padding:22px;}
+  .metric .val{font-family:'IBM Plex Serif', serif; font-size:26px; color:var(--cyan-dim);}
+  .metric .label{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-dark-dim); margin-top:6px; text-transform:uppercase; letter-spacing:0.04em;}
+  .metric .edit-note{font-size:11px; color:var(--text-dark-dim); margin-top:8px; font-style:italic;}
+
+  .secondary-case{
+    margin-top:64px; padding-top:48px; border-top:1px dashed var(--line-dark);
+  }
+  .secondary-case .fig-label{color:#9A6E1F;}
+  .sc-context{font-size:15px; max-width:680px; margin-top:16px; color:var(--text-dark);}
+  .sc-confidential{margin-top:10px; margin-bottom:44px; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.04em; color:#6B7078;}
+  .sc-confidential strong{font-weight:600;}
+  .sc-compare{display:flex; align-items:stretch; gap:0; margin:36px 0; border:1px solid var(--line-dark);}
+  .sc-compare-col{flex:1; padding:20px 22px;}
+  .sc-compare-col:first-child{border-right:1px dashed var(--line-dark); background:var(--paper-2);}
+  .sc-compare-label{font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;}
+  .sc-compare-col:first-child .sc-compare-label{color:#9A6E1F;}
+  .sc-compare-col:last-child .sc-compare-label{color:var(--cyan-dim);}
+  .sc-compare-col ul{padding-left:16px; font-size:13px; line-height:1.6;}
+  @media (max-width:720px){ .sc-compare{flex-direction:column;} .sc-compare-col:first-child{border-right:none; border-bottom:1px dashed var(--line-dark);} }
+  .sc-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:32px; margin-top:24px;}
+  @media (max-width:720px){ .sc-grid{grid-template-columns:1fr;} }
+  .sc-col h5{font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase; color:var(--text-dark-dim); margin-bottom:8px;}
+  .sc-col p{font-size:14px;}
+
+  .skills-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:40px;}
+  @media (max-width:720px){ .skills-grid{grid-template-columns:1fr;} }
+  .skill-group h3{font-family:'IBM Plex Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--amber); margin-bottom:18px;}
+  .pill-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .pill{
+    font-size:13px; padding:7px 14px; border:1px solid var(--line); border-radius:14px; color:var(--text-light-dim);
+  }
+
+  .art-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:24px;}
+  @media (max-width:720px){ .art-grid{grid-template-columns:1fr;} }
+  .art-card{border:1px solid var(--line-dark); background:#fff; padding:0;}
+  .art-thumb{
+    height:150px; overflow:hidden;
+    display:flex; align-items:stretch; justify-content:stretch;
+  }
+  .art-thumb svg{display:block;}
+  .art-body{padding:18px 20px;}
+  .art-body h4{font-family:'IBM Plex Serif', serif; font-size:16px; margin-bottom:6px;}
+  .art-body p{font-size:13px; color:var(--text-dark-dim);}
+
+  .contact-wrap{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px;}
+  .contact-links{display:flex; flex-direction:column; gap:10px; margin-top:20px;}
+  .contact-links a{color:var(--cyan); text-decoration:none; font-size:15px;}
+  .contact-links a:hover{color:var(--amber);}
+  footer{padding:30px 6vw; border-top:1px solid var(--line); font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-light-dim); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">NISHITA — BUSINESS ANALYST</div>
+  <ul>
+    <li><a href="#profile">Profile</a></li>
+    <li><a href="#case-study">Case study</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#artifacts">Artifacts</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="profile">
+  <div class="eyebrow"><strong>Business Analyst &middot; Functional Consultant &middot; IBM Consulting</strong></div>
+  <h1>I map the gap between what a business asks for<br>and <em>what actually gets built.</em></h1>
+  <p class="lead">
+    Good solutions start with the right problem. I work with stakeholders to uncover what the business
+    actually needs, translate it into clear requirements, and improve the processes behind it &mdash; from
+    AS&ndash;IS analysis and gap identification to TO&ndash;BE design and UAT.
+  </p>
+
+  <div class="tagrow">
+    <span class="tag">2+ yrs experience</span>
+    <span class="tag">Global stakeholder management</span>
+    <span class="tag">Order Management &middot; Inventory &middot; Procurement</span>
+    <span class="tag">SQL &middot; Advanced Excel</span>
+    <span class="tag">Agile &middot; JIRA &middot; UAT</span>
+    <span class="tag">Hyderabad, India</span>
+  </div>
+
+  <div class="cta-row">
+    <a href="#case-study" class="btn primary">View case study</a>
+    <a href="#" class="btn ghost">Download resume &#8594;</a>
+  </div>
+</header>
+
+<section class="light-panel reveal" id="case-study">
+  <div class="section-head">
+    
+    <h2 class="section-title">Flagship case study &mdash; Distributor Onboarding Workflow Redesign</h2>
+  </div>
+
+  <div class="cs-meta">
+    <p class="cs-tagline">Enterprise Operations &middot; Distributor Onboarding &middot; Process Improvement</p>
+    <p class="cs-confidential"><strong>Confidentiality note:</strong> Project details have been anonymized and adapted to protect client and organizational confidentiality.</p>
+  </div>
+
+  <div class="cs-grid">
+    <div class="cs-block">
+      <h3>Context</h3>
+      <p>
+        A large enterprise distributor network was managing new-distributor onboarding through a manual,
+        multi-handoff process involving email, spreadsheets, and disconnected approval steps. As the
+        network scaled, onboarding time and errors increased, creating operational friction and limited
+        visibility across the process.
+      </p>
+    </div>
+    <div class="cs-block">
+      <h3>Problem</h3>
+      <p>
+        Business stakeholders could describe the pain &mdash; onboarding took too long, data was
+        inconsistent across systems, and approvals stalled without visibility &mdash; but the underlying
+        challenges had not been translated into a clear set of requirements that a delivery team could act
+        on. My role was to close that gap.
+      </p>
+    </div>
+  </div>
+
+  <div class="process-strip">
+    <div class="p-step">
+      <div class="p-num">01</div>
+      <div class="p-title">Elicitation</div>
+      <div class="p-desc">Stakeholder interviews and workshops across operations, IT, and distributor-facing teams to understand the actual process, pain points, dependencies, and business expectations.</div>
+    </div>
+    <div class="p-step">
+      <div class="p-num">02</div>
+      <div class="p-title">AS-IS mapping</div>
+      <div class="p-desc">Mapped the existing onboarding workflow across teams and systems, identifying manual handoffs, approval bottlenecks, data dependencies, and ownership gaps.</div>
+    </div>
+    <div class="p-step">
+      <div class="p-num">03</div>
+      <div class="p-title">Requirements</div>
+      <div class="p-desc">Translated stakeholder needs and process findings into structured business and functional requirements, documenting the redesigned workflow through BRD/FRD artifacts.</div>
+    </div>
+    <div class="p-step">
+      <div class="p-num">04</div>
+      <div class="p-title">TO-BE design</div>
+      <div class="p-desc">Designed a streamlined future-state workflow with consolidated approval steps, clearer ownership, improved visibility, and reduced dependency on manual coordination.</div>
+    </div>
+    <div class="p-step">
+      <div class="p-num">05</div>
+      <div class="p-title">UAT &amp; sign-off</div>
+      <div class="p-desc">Supported UAT with business stakeholders by defining test scenarios, tracking defects, validating fixes, and supporting business sign-off before go-live.</div>
+    </div>
+  </div>
+
+  <div class="cs-grid" style="margin-top:8px;">
+    <div class="cs-block">
+      <h3>My role</h3>
+      <ul style="padding-left:18px; font-size:15px;">
+        <li>Owned requirement gathering end-to-end across business and IT stakeholders</li>
+        <li>Authored BRD/FRD documentation for the redesigned workflow</li>
+        <li>Led UAT planning, execution, and stakeholder sign-off</li>
+        <li>Tracked delivery through JIRA / Azure DevOps against Agile sprints</li>
+      </ul>
+    </div>
+    <div class="callout">
+      <h4>Risks &amp; assumptions</h4>
+      <ul>
+        <li>Assumed distributor-facing teams could absorb a changed approval flow without added headcount</li>
+        <li>Flagged data-consistency risks between the onboarding tool and downstream systems early, before UAT</li>
+        <li>Validated assumptions in workshops rather than carrying them silently into the FRD</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="metric-row">
+    <div class="metric">
+      <div class="val">15+</div>
+      <div class="label">BRD / FRD deliverables</div>
+      <div class="edit-note">Requirements documented across business processes</div>
+    </div>
+    <div class="metric">
+      <div class="val">3</div>
+      <div class="label">Global regions supported</div>
+      <div class="edit-note">EMENA &middot; AOA &middot; AMS</div>
+    </div>
+    <div class="metric">
+      <div class="val">20+</div>
+      <div class="label">Sites supported</div>
+      <div class="edit-note">Cross-functional stakeholder collaboration</div>
+    </div>
+    <div class="metric">
+      <div class="val">50+</div>
+      <div class="label">ServiceNow tickets handled</div>
+      <div class="edit-note">Issue analysis, resolution &amp; stakeholder coordination</div>
+    </div>
+  </div>
+
+  <div class="secondary-case">
+    
+    <h2 class="section-title" style="font-size:22px; margin-top:10px;">Secondary case &mdash; Shipment Visibility &amp; Report Personalisation</h2>
+
+    <p class="sc-context">
+      Teams working with shipment data had different reporting needs across operations, account
+      management, and distributor support. A single generic report made it difficult for each team to
+      quickly access the information relevant to their workflows. The challenge was to understand these
+      differences and translate them into a more usable, role-specific reporting experience.
+    </p>
+    <p class="sc-confidential"><strong>Confidentiality note</strong> &middot; Project details have been anonymized and adapted to protect client and organizational confidentiality.</p>
+
+    <div class="sc-compare">
+      <div class="sc-compare-col">
+        <div class="sc-compare-label">Before</div>
+        <ul>
+          <li>One generic report layout used across teams</li>
+          <li>Teams relied on manual status checks and follow-ups</li>
+          <li>Limited visibility into shipment exceptions</li>
+          <li>Different teams had different reporting requirements</li>
+        </ul>
+      </div>
+      <div class="sc-compare-col">
+        <div class="sc-compare-label">After</div>
+        <ul>
+          <li>Reporting layout aligned to individual team requirements</li>
+          <li>Shipment information surfaced based on user needs</li>
+          <li>Exceptions made easier to identify and follow up</li>
+          <li>One shared data foundation supporting multiple views</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sc-grid">
+      <div class="sc-col">
+        <h5>Problem</h5>
+        <p>Stakeholders lacked an efficient way to access shipment information relevant to their specific workflows. The existing reporting experience did not account for differences in how each team consumed and acted on shipment data.</p>
+      </div>
+      <div class="sc-col">
+        <h5>Approach</h5>
+        <p>Gathered requirements from different consuming teams, identified their common and team-specific information needs, and translated them into functional requirements for a personalised reporting layout. Worked with stakeholders to validate the proposed experience and ensure the requirements were clear for delivery.</p>
+      </div>
+      <div class="sc-col">
+        <h5>Outcome</h5>
+        <p>Created a more user-focused reporting experience by aligning shipment visibility with how different teams actually consumed the data, while maintaining a shared underlying dataset rather than creating separate reports for each team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-head">
+    
+    <h2 class="section-title">Skills &amp; tools</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h3>Business analysis</h3>
+      <div class="pill-row">
+        <span class="pill">Requirements Elicitation</span>
+        <span class="pill">BRD / FRD Documentation</span>
+        <span class="pill">AS-IS / TO-BE Analysis</span>
+        <span class="pill">Process Mapping</span>
+        <span class="pill">Gap &amp; Impact Analysis</span>
+        <span class="pill">Root Cause Analysis</span>
+        <span class="pill">Stakeholder Management</span>
+        <span class="pill">Requirements Validation &amp; UAT</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Data &amp; tools</h3>
+      <div class="pill-row">
+        <span class="pill">SQL</span>
+        <span class="pill">Advanced Excel</span>
+        <span class="pill">Power BI</span>
+        <span class="pill">Jira</span>
+        <span class="pill">Azure DevOps</span>
+        <span class="pill">ServiceNow</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Delivery &amp; domain</h3>
+      <div class="pill-row">
+        <span class="pill">Agile / Scrum</span>
+        <span class="pill">Backlog Refinement</span>
+        <span class="pill">Sprint Support</span>
+        <span class="pill">Release Validation</span>
+        <span class="pill">Order Management</span>
+        <span class="pill">Inventory</span>
+        <span class="pill">Procurement</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light-panel" id="artifacts">
+  <div class="section-head">
+    
+    <h2 class="section-title">Work samples</h2>
+    
+  </div>
+  <p class="cs-confidential"><strong>Confidentiality note:</strong> Project details have been anonymized and adapted to protect client and organizational confidentiality.</p>
+
+  <div class="art-grid">
+    <div class="art-card">
+      <div class="art-thumb">
+        <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <rect x="0" y="0" width="400" height="150" fill="#F4F2EA"/>
+          <text x="20" y="24" font-family="IBM Plex Mono, monospace" font-size="10" fill="#9A6E1F" letter-spacing="1">BRD-104 &#8226; FUNCTIONAL REQUIREMENTS</text>
+          <line x1="20" y1="34" x2="380" y2="34" stroke="#C9C4B2" stroke-width="1"/>
+          <g font-family="IBM Plex Mono, monospace" font-size="9" fill="#5B6470">
+            <text x="20" y="52">REQ-ID</text>
+            <text x="80" y="52">DESCRIPTION</text>
+            <text x="300" y="52">STATUS</text>
+          </g>
+          <line x1="20" y1="58" x2="380" y2="58" stroke="#D8D3C4" stroke-width="1"/>
+          <g font-family="IBM Plex Mono, monospace" font-size="9" fill="#16202C">
+            <text x="20" y="76">FR-011</text>
+            <rect x="80" y="68" width="190" height="6" fill="#D8D3C4"/>
+            <rect x="300" y="68" width="34" height="10" fill="#7FB8BE" opacity="0.35"/>
+            <text x="304" y="76" fill="#4F868C" font-size="8">Approved</text>
+            <text x="20" y="96">FR-012</text>
+            <rect x="80" y="88" width="150" height="6" fill="#D8D3C4"/>
+            <rect x="300" y="88" width="34" height="10" fill="#D6A24C" opacity="0.35"/>
+            <text x="304" y="96" fill="#9A6E1F" font-size="8">Pending</text>
+            <text x="20" y="116">FR-013</text>
+            <rect x="80" y="108" width="170" height="6" fill="#D8D3C4"/>
+            <rect x="300" y="108" width="34" height="10" fill="#7FB8BE" opacity="0.35"/>
+            <text x="304" y="116" fill="#4F868C" font-size="8">Approved</text>
+            <text x="20" y="136">FR-014</text>
+            <rect x="80" y="128" width="120" height="6" fill="#D8D3C4"/>
+            <rect x="300" y="128" width="34" height="10" fill="#D6A24C" opacity="0.35"/>
+            <text x="304" y="136" fill="#9A6E1F" font-size="8">Pending</text>
+          </g>
+        </svg>
+      </div>
+      <div class="art-body">
+        <h4>BRD / FRD Requirements Excerpt</h4>
+        <p>A redacted section of a Business Requirements Document showing functional requirement structure, IDs, and approval status.</p>
+      </div>
+    </div>
+
+    <div class="art-card">
+      <div class="art-thumb">
+        <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <rect x="0" y="0" width="400" height="150" fill="#F4F2EA"/>
+          <text x="20" y="22" font-family="IBM Plex Mono, monospace" font-size="9" fill="#9A6E1F" letter-spacing="1">AS-IS</text>
+          <text x="20" y="96" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4F868C" letter-spacing="1">TO-BE</text>
+          <g font-family="IBM Plex Mono, monospace" font-size="8" fill="#16202C">
+            <rect x="20" y="30" width="80" height="34" fill="none" stroke="#B7B09B" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="34" y="50">Request</text>
+            <rect x="130" y="30" width="80" height="34" fill="none" stroke="#B7B09B" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="140" y="45">Manual</text><text x="140" y="55">review</text>
+            <rect x="240" y="30" width="80" height="34" fill="none" stroke="#B7B09B" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="248" y="45">Email</text><text x="248" y="55">approval</text>
+            <line x1="100" y1="47" x2="128" y2="47" stroke="#B7B09B" stroke-width="1"/>
+            <line x1="210" y1="47" x2="238" y2="47" stroke="#B7B09B" stroke-width="1"/>
+          </g>
+          <g font-family="IBM Plex Mono, monospace" font-size="8" fill="#16202C">
+            <rect x="20" y="104" width="70" height="34" fill="#7FB8BE" opacity="0.12" stroke="#4F868C" stroke-width="1"/>
+            <text x="30" y="124">Request</text>
+            <rect x="122" y="104" width="70" height="34" fill="#7FB8BE" opacity="0.12" stroke="#4F868C" stroke-width="1"/>
+            <text x="130" y="119">Auto</text><text x="130" y="129">routing</text>
+            <rect x="224" y="104" width="70" height="34" fill="#7FB8BE" opacity="0.12" stroke="#4F868C" stroke-width="1"/>
+            <text x="230" y="119">System</text><text x="230" y="129">sign-off</text>
+            <rect x="326" y="104" width="60" height="34" fill="#7FB8BE" opacity="0.12" stroke="#4F868C" stroke-width="1"/>
+            <text x="335" y="124">Live</text>
+            <line x1="90" y1="121" x2="120" y2="121" stroke="#4F868C" stroke-width="1"/>
+            <line x1="192" y1="121" x2="222" y2="121" stroke="#4F868C" stroke-width="1"/>
+            <line x1="294" y1="121" x2="324" y2="121" stroke="#4F868C" stroke-width="1"/>
+          </g>
+        </svg>
+      </div>
+      <div class="art-body">
+        <h4>AS-IS &#8594; TO-BE Process Map</h4>
+        <p>Workflow comparison diagram from the distributor onboarding redesign, showing consolidated steps and automated handoffs.</p>
+      </div>
+    </div>
+
+    <div class="art-card">
+      <div class="art-thumb">
+        <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <rect x="0" y="0" width="400" height="150" fill="#F4F2EA"/>
+          <text x="20" y="22" font-family="IBM Plex Mono, monospace" font-size="10" fill="#9A6E1F" letter-spacing="1">STAKEHOLDER &#215; REQUIREMENT MATRIX</text>
+          <g stroke="#D8D3C4" stroke-width="1">
+            <line x1="20" y1="32" x2="380" y2="32"/>
+            <line x1="20" y1="58" x2="380" y2="58"/>
+            <line x1="20" y1="84" x2="380" y2="84"/>
+            <line x1="20" y1="110" x2="380" y2="110"/>
+            <line x1="20" y1="136" x2="380" y2="136"/>
+            <line x1="140" y1="32" x2="140" y2="136"/>
+            <line x1="210" y1="32" x2="210" y2="136"/>
+            <line x1="280" y1="32" x2="280" y2="136"/>
+            <line x1="350" y1="32" x2="350" y2="136"/>
+          </g>
+          <g font-family="IBM Plex Mono, monospace" font-size="8" fill="#5B6470">
+            <text x="24" y="46">STAKEHOLDER</text>
+            <text x="160" y="46">OPS</text>
+            <text x="228" y="46">IT</text>
+            <text x="294" y="46">FINANCE</text>
+          </g>
+          <g font-family="IBM Plex Mono, monospace" font-size="8" fill="#16202C">
+            <text x="24" y="72">Ops Lead</text>
+            <text x="298" y="72" font-size="9">R</text>
+            <text x="24" y="98">IT Manager</text>
+            <text x="228" y="98" font-size="9">A</text>
+            <text x="24" y="124">Finance Rep</text>
+            <text x="298" y="124" font-size="9">C</text>
+            <text x="160" y="72" font-size="9">C</text>
+            <text x="160" y="124" font-size="9">I</text>
+          </g>
+        </svg>
+      </div>
+      <div class="art-body">
+        <h4>Stakeholder &amp; Requirement Matrix</h4>
+        <p>RACI-style matrix mapping requirement ownership and sign-off responsibility across stakeholder groups.</p>
+      </div>
+    </div>
+
+    <div class="art-card">
+      <div class="art-thumb">
+        <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <rect x="0" y="0" width="400" height="150" fill="#F4F2EA"/>
+          <text x="20" y="22" font-family="IBM Plex Mono, monospace" font-size="10" fill="#9A6E1F" letter-spacing="1">SHIPMENT VISIBILITY &#8226; TEAM VIEW</text>
+          <g stroke="#D8D3C4" stroke-width="1">
+            <line x1="20" y1="128" x2="380" y2="128"/>
+          </g>
+          <g fill="#7FB8BE" opacity="0.55">
+            <rect x="30" y="86" width="26" height="42"/>
+            <rect x="70" y="66" width="26" height="62"/>
+            <rect x="110" y="98" width="26" height="30"/>
+            <rect x="150" y="52" width="26" height="76"/>
+            <rect x="190" y="76" width="26" height="52"/>
+          </g>
+          <g fill="#D6A24C" opacity="0.7">
+            <circle cx="250" cy="60" r="4"/>
+            <circle cx="270" cy="72" r="4"/>
+            <circle cx="290" cy="55" r="4"/>
+            <circle cx="310" cy="80" r="4"/>
+            <circle cx="330" cy="64" r="4"/>
+            <polyline points="250,60 270,72 290,55 310,80 330,64" fill="none" stroke="#D6A24C" stroke-width="1.2"/>
+          </g>
+          <g font-family="IBM Plex Mono, monospace" font-size="8" fill="#5B6470">
+            <text x="30" y="140">Onboarding</text>
+            <text x="250" y="140">Exceptions</text>
+          </g>
+        </svg>
+      </div>
+      <div class="art-body">
+        <h4>Shipment Visibility &amp; Reporting Analysis</h4>
+        <p>Team-facing reporting view built on shared shipment data, personalised per consuming group.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-head">
+    
+    <h2 class="section-title">Contact</h2>
+  </div>
+  <div class="contact-wrap">
+    <p style="max-width:420px; color:var(--text-light-dim); font-size:15px;">
+      Business Analyst with hands-on experience in requirements engineering, process improvement, 
+      UAT, and cross-functional stakeholder management.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:your.email@example.com">nishitamohanty08@gmail.com</a>
+      <a href="#">Download resume (PDF) &#8594;</a>
+      <a href="https://www.linkedin.com/in/nishitamohanty/" target="_blank">
+              Connect on LinkedIn →
+      </a>
+      <a href="tel:+91XXXXXXXXXX">
+        +91 7894861249
+      </a>
+      
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>&copy; Nishita Mohanty</span>
+  <span>Business Analysis · Functional Consulting · Enterprise Solutions</span>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('section');
+  items.forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:0.08});
+  items.forEach(el => io.observe(el));
+
+  // Scroll-spy: highlight the nav link for the section currently in view
+  const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+  const spySections = navLinks
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+
+  function setActiveLink(id){
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+    });
+  }
+
+  const spy = new IntersectionObserver((entries) => {
+    // Pick the entry closest to the top of the viewport among those currently intersecting
+    const visible = entries.filter(e => e.isIntersecting);
+    if (visible.length > 0) {
+      visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      setActiveLink(visible[0].target.id);
+    }
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+  spySections.forEach(sec => spy.observe(sec));
+
+  // Set initial state on load
+  window.addEventListener('load', () => {
+    const first = spySections[0];
+    if (first) setActiveLink(first.id);
+  });
+</script>
+
+</body>
+</html>
